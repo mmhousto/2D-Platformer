@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
+    public enum PlatformType { Right, Up }
+    public PlatformType platformType;
     public bool movingRight;
     public bool movingUp;
     private Vector3 startPosition;
@@ -19,22 +21,46 @@ public class MovingPlatform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (movingRight)
+        if (platformType == PlatformType.Right)
         {
-            transform.Translate(Vector3.right * speed * Time.deltaTime);
-        }
-        else
-        {
-            transform.Translate(Vector3.left * speed * Time.deltaTime);
-        }
 
-        if(transform.position.x >= endPosition.x)
-        {
-            movingRight = false;
+            if (movingRight)
+            {
+                transform.Translate(Vector3.right * speed * Time.deltaTime);
+            }
+            else
+            {
+                transform.Translate(Vector3.left * speed * Time.deltaTime);
+            }
+
+            if (transform.position.x >= endPosition.x)
+            {
+                movingRight = false;
+            }
+            if (transform.position.x <= startPosition.x)
+            {
+                movingRight = true;
+            }
         }
-        if(transform.position.x <= startPosition.x)
+        else if (platformType == PlatformType.Up)
         {
-            movingRight = true;
+            if (movingUp)
+            {
+                transform.Translate(Vector3.up * speed * Time.deltaTime);
+            }
+            else
+            {
+                transform.Translate(Vector3.down * speed * Time.deltaTime);
+            }
+
+            if (transform.position.y >= endPosition.y)
+            {
+                movingUp = false;
+            }
+            if (transform.position.y <= startPosition.y)
+            {
+                movingUp = true;
+            }
         }
     }
 
