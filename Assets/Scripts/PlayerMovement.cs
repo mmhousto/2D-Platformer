@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private float jumpTime = 0.5f;
     private float canJumpTimer = 0;
 
-    // Start is called before the first frame update
+    // Start is called ONCE before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(horizontalMovement, rb.velocity.y);
-
+        //rb.AddForce(transform.forward * 500);
         Jump();
     }
 
